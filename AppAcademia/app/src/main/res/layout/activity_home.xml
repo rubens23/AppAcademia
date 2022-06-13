@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".homeActivity"
+        android:orientation="vertical">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/homeActivityProfileImage"
+        android:layout_width="151dp"
+        android:layout_height="151dp"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="131dp"
+        android:src="@drawable/user10" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rubens"
+            android:textSize="30sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:layout_below="@id/homeActivityProfileImage"
+            android:textAlignment="center"/>
+
+
+    <Button
+        android:id="@+id/btnActivityImc"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="242dp"
+        android:backgroundTint="@color/altblack"
+        android:drawableTop="@drawable/ic_imc_balance"
+        android:drawableTint="@color/purple_500"
+        android:text="Cálculo imc"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnMedidas"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="242dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toRightOf="@id/btnActivityImc"
+        android:backgroundTint="@color/altblack"
+        android:drawableTop="@drawable/ic_medidas1"
+        android:drawableTint="@color/darkblue"
+        android:text="REGISTRO MEDIDAS"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnEvolucao"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/btnMedidas"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@color/altblack"
+        android:drawableTop="@drawable/ic_baseline_bolt_24"
+        android:drawableTint="@color/orange"
+        android:text="EVOLUÇÃO"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnDieta"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="397dp"
+        android:layout_toRightOf="@+id/btnEvolucao"
+        android:backgroundTint="@color/altblack"
+        android:drawableTop="@drawable/ic_dieta4"
+        android:drawableTint="@color/green"
+        android:text="DICAS DIETA"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnMeta"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/btnEvolucao"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/altblack"
+        android:drawableTop="@drawable/ic_meta1"
+        android:drawableTint="@color/azuldesfocado"
+        android:text="ADICIONAR META"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnSair"
+        android:layout_width="180dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/btnDieta"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/btnMeta"
+        android:backgroundTint="@color/altblack"
+        android:layout_marginEnd="10dp"
+        android:drawableTop="@drawable/ic_baseline_logout_1"
+        android:drawableTint="@color/red"
+        android:text="SAIR DO APP"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnDados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnSair"
+        android:layout_marginTop="30dp"
+        android:text="VER DADOS DO USUARIO"
+        android:textSize="24sp"/>
+
+    
+
+
+
+</RelativeLayout>

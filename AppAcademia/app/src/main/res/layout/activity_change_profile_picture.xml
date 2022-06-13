@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityChangeProfilePicture"
+    android:orientation="vertical"
+    android:background="@color/gray">
+
+
+    <RelativeLayout
+        android:id="@+id/layout_filho_1"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/background6">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/change_profile_photo"
+            android:layout_width="151dp"
+            android:layout_height="151dp"
+            android:layout_marginStart="131dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="131dp"
+            android:layout_marginBottom="7dp"
+            android:src="@drawable/user10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="83dp"
+            android:layout_marginTop="10dp"
+            android:text="Mudar Imagem de Perfil"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnVoltar"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/layout_filho_1"
+        android:layout_marginStart="34sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="18dp"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/white"
+        android:text="VOLTAR"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btnSalvar"
+        android:layout_width="160dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/layout_filho_1"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/btnVoltar"
+        android:backgroundTint="@color/purple_500"
+        android:text="SALVAR"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+</RelativeLayout>

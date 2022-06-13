@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "126426053517",
+    "project_id": "app-academia-2eff9",
+    "storage_bucket": "app-academia-2eff9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126426053517:android:19a69dde1cfa0b7d115bc4",
+        "android_client_info": {
+          "package_name": "com.example.circlepicture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126426053517-73kh7id5t4fs6vst1n18l2s7ea3ncfsp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBflgvXzRxILyzPm8dAw8Mm15JIt37jbN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126426053517-73kh7id5t4fs6vst1n18l2s7ea3ncfsp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

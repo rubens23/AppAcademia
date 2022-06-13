@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DadosUsuariosJV"
+    android:orientation="vertical">
+
+<TextView
+    android:id="@+id/TVDados_nome"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="nome"
+    android:textSize="34sp"/>
+
+    <TextView
+        android:id="@+id/TVDados_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="email"
+        android:textSize="34sp"/>
+
+    <TextView
+        android:id="@+id/TVDados_photoUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="photoUrl"
+        android:textSize="34sp"/>
+
+    <TextView
+        android:id="@+id/TVDados_uid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="uid"
+        android:textSize="34sp"/>
+
+
+
+
+</LinearLayout>
