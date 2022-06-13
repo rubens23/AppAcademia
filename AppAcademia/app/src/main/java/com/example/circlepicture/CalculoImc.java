@@ -11,6 +11,8 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 
 public class CalculoImc extends AppCompatActivity {
+    
+    //todo deixar o layout dessa activity mais bonito
 
     EditText peso, altura;
     Button btnImc;
