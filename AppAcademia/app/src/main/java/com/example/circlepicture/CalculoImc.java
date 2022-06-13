@@ -25,7 +25,7 @@ public class CalculoImc extends AppCompatActivity {
         setContentView(R.layout.activity_calculo_imc);
 
         peso = findViewById(R.id.peso);
-        altura = (EditText) findViewById(R.id.altura);
+        altura = findViewById(R.id.altura);
         resultadoImc = (TextView) findViewById(R.id.resultadoImc);
         auxResultadoImc = (TextView) findViewById(R.id.auxResultadoImc);
         descricaoImc = (TextView) findViewById(R.id.descricaoIMC);
