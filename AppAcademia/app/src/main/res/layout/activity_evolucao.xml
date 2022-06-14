@@ -21,6 +21,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:numColumns="6"/>
 
+
     <TextView
         android:id="@+id/txtSemImagens"
         android:layout_width="match_parent"
