@@ -1,5 +1,6 @@
 package com.example.circlepicture;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
@@ -23,16 +24,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,9 +49,11 @@ public class ActivityEvolucao extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     //TODO como lidar com datas aqui? Como agrupar fotos na mesma semana, dia, mes ou ano?
+   
 
     FloatingActionButton btn_new_photo;
     Uri filePath;
+    Uri photoURI;
 
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
@@ -69,6 +75,7 @@ public class ActivityEvolucao extends AppCompatActivity {
 
         BancoController bc = new BancoController(this);
         Cursor cursor = bc.getNumberOfImages(FirebaseAuth.getInstance().getUid());
+
 
 
         if(cursor.getCount()==0){
@@ -128,7 +135,7 @@ public class ActivityEvolucao extends AppCompatActivity {
             }
             //continue only if the file was successfully created
             if(photoFile != null){
-                Uri photoURI = FileProvider.getUriForFile(this, "com.example.circlepicture", photoFile);
+                photoURI = FileProvider.getUriForFile(this, "com.example.circlepicture", photoFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
             }
@@ -144,6 +151,21 @@ public class ActivityEvolucao extends AppCompatActivity {
         //todo eu aparentemente gerei o arquivo com a foto em alta resolução mas eu acho que eu ainda tenho que configurar esse metodo
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bitmap bitmap;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoURI);
+                String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, "Title", null);
+                filePath = Uri.parse(path);
+                uploadImageToFirebaseStorage();
+
+            }catch (FileNotFoundException e){
+                Toast.makeText(this, "primeiro catch: "+e.getMessage(), Toast.LENGTH_LONG).show();
+            }catch (IOException e){
+                Toast.makeText(this, "segundo catch: "+e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
+        /*
+        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK && data != null){
             Bundle extras = data.getExtras();
             Bitmap bitmapReference = (Bitmap) extras.get("data");
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -157,6 +179,10 @@ public class ActivityEvolucao extends AppCompatActivity {
         }else{
             Toast.makeText(this, "os requests code são diferentes!!", Toast.LENGTH_LONG).show();
         }
+
+         */
+
+
 
 
 
@@ -197,8 +223,28 @@ public class ActivityEvolucao extends AppCompatActivity {
                         //download uri da imagem capturado com sucesso
                         //vamo ver como está o banco do meu appAcademia
                         bc.insertNewPhoto(id_user, date, nomeImagem, uri.toString());//TODO testar tudo isso///ta com algum erro
+                        //testando os metodos do storagemetadata da referencia do storage ao tirar uma foto nova
+                       ref.getMetadata().addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
+                           @Override
+                           public void onSuccess(StorageMetadata storageMetadata) {
+                               String tipoImagem = storageMetadata.getContentType();
+                               Toast.makeText(ActivityEvolucao.this, "tipo da imagem: "+tipoImagem, Toast.LENGTH_SHORT).show();
+                           }
+                       })
+                               .addOnFailureListener(new OnFailureListener() {
+                                   @Override
+                                   public void onFailure(@NonNull Exception e) {
+                                        //não conseguiu pegar os metadados
+                                   }
+                               });
+
                     }
                 });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ActivityEvolucao.this, "erro ao colocar a imagem no storage: "+e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
