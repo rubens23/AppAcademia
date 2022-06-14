@@ -30,6 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -222,6 +223,21 @@ public class ActivityEvolucao extends AppCompatActivity {
                         //download uri da imagem capturado com sucesso
                         //vamo ver como está o banco do meu appAcademia
                         bc.insertNewPhoto(id_user, date, nomeImagem, uri.toString());//TODO testar tudo isso///ta com algum erro
+                        //testando os metodos do storagemetadata da referencia do storage ao tirar uma foto nova
+                       ref.getMetadata().addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
+                           @Override
+                           public void onSuccess(StorageMetadata storageMetadata) {
+                               String tipoImagem = storageMetadata.getContentType();
+                               Toast.makeText(ActivityEvolucao.this, "tipo da imagem: "+tipoImagem, Toast.LENGTH_SHORT).show();
+                           }
+                       })
+                               .addOnFailureListener(new OnFailureListener() {
+                                   @Override
+                                   public void onFailure(@NonNull Exception e) {
+                                        //não conseguiu pegar os metadados
+                                   }
+                               });
+
                     }
                 });
             }
