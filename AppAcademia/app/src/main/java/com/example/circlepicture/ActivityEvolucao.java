@@ -40,6 +40,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -154,7 +155,7 @@ public class ActivityEvolucao extends AppCompatActivity {
             Bitmap bitmap;
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoURI);
-                String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, "Title", null);
+                String path = MediaStore.Images.Media.insertImage(this.getContentResolver(), bitmap, "img_"+ Calendar.getInstance().getTime(), null);
                 filePath = Uri.parse(path);
                 uploadImageToFirebaseStorage();
 
@@ -219,16 +220,55 @@ public class ActivityEvolucao extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(Uri uri) {
-                        Toast.makeText(ActivityEvolucao.this, ""+uri, Toast.LENGTH_LONG).show();
-                        //download uri da imagem capturado com sucesso
-                        //vamo ver como está o banco do meu appAcademia
                         bc.insertNewPhoto(id_user, date, nomeImagem, uri.toString());//TODO testar tudo isso///ta com algum erro
                         //testando os metodos do storagemetadata da referencia do storage ao tirar uma foto nova
                        ref.getMetadata().addOnSuccessListener(new OnSuccessListener<StorageMetadata>() {
                            @Override
                            public void onSuccess(StorageMetadata storageMetadata) {
-                               String tipoImagem = storageMetadata.getContentType();
-                               Toast.makeText(ActivityEvolucao.this, "tipo da imagem: "+tipoImagem, Toast.LENGTH_SHORT).show();
+                               long creationTime = storageMetadata.getCreationTimeMillis();
+                               Calendar cal = Calendar.getInstance();
+                               String ano = Integer.toString(cal.get(Calendar.YEAR));
+                               String mes = Integer.toString(cal.get(Calendar.MONTH));
+                               String dia = Integer.toString(cal.get(Calendar.DAY_OF_MONTH));
+                               switch(mes){
+                                   case "0":
+                                       //janeiro
+                                       break;
+                                   case "1":
+                                       //fevereiro
+                                       break;
+                                   case "2":
+                                       //março
+                                       break;
+                                   case "3":
+                                       //abril
+                                       break;
+                                   case "4":
+                                       //maio
+                                       break;
+                                   case "5":
+                                       //junho
+                                       break;
+                                   case "6":
+                                       //julho
+                                       break;
+                                   case "7":
+                                       //agosto
+                                       break;
+                                   case "8":
+                                       //setembro
+                                       break;
+                                   case "9":
+                                       //outubro
+                                       break;
+                                   case "10":
+                                       //novembro
+                                       break;
+                                   case "11":
+                                       //dezembro
+                                       break;
+                               }
+
                            }
                        })
                                .addOnFailureListener(new OnFailureListener() {
@@ -254,6 +294,11 @@ public class ActivityEvolucao extends AppCompatActivity {
     }
 }
 
-//codigo para criar imageViews automaticamente: https://stackoverflow.com/questions/29268976/how-to-automatically-create-imageview-in-android
+//link sectiloned grid:
+//https://gist.github.com/gabrielemariotti/e81e126227f8a4bb339c
+//testar essa solução em um projeto novo, antes de implementar aqui, veja se essa
+//solução suportará a adição de novas imagens e se tudo vai ser atualizado certinho
+//link do stackoverflow onde eu achei essa possível solução:
+//https://stackoverflow.com/questions/7397988/android-gridview-with-categories
 
 
