@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleViewHolder> {
-    private static final int COUNT = 100;
+    private static final int COUNT = 50;//100
 
     private final Context mContext;
     private final List<Integer> mItems;

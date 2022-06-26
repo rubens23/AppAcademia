@@ -1,6 +1,7 @@
 package com.example.circlepicture;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +17,19 @@ public class ActivityEvolucao extends AppCompatActivity {
 
     private ActivityEvolucaoBinding binding;
     private SimpleAdapter mAdapter;
+    private BancoController meuBanco;
+
+    //todo se o user ainda não tiver tirado nenhuma foto mostrar uma mensagem no centro da tela dizendo: "tire uma foto para ter um registro da mudança do seu corpo com os exercícios"
+    //todo se o user já tiver tirado alguma foto eu tenho que carregar a foto com sua devida categoria, que no caso é um grupo de intervalo de datas(hoje, na ultima semana, nos ultimos 6 meses etc)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityEvolucaoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        meuBanco = new BancoController(this);
+
 
         //Your RecyclerView
         binding.recycler.setHasFixedSize(true);
@@ -34,11 +42,11 @@ public class ActivityEvolucao extends AppCompatActivity {
         List<SectionedGridRecyclerViewAdapter.Section> sections = new ArrayList<SectionedGridRecyclerViewAdapter.Section>();
 
         //Sections
-        sections.add(new SectionedGridRecyclerViewAdapter.Section(0,"Section 1"));
-        sections.add(new SectionedGridRecyclerViewAdapter.Section(5,"Section 2"));
-        sections.add(new SectionedGridRecyclerViewAdapter.Section(12,"Section 3"));
-        sections.add(new SectionedGridRecyclerViewAdapter.Section(14,"Section 4"));
-        sections.add(new SectionedGridRecyclerViewAdapter.Section(20,"Section 5"));
+        sections.add(new SectionedGridRecyclerViewAdapter.Section(0,"hoje"));
+        sections.add(new SectionedGridRecyclerViewAdapter.Section(5,"na última semana"));
+        sections.add(new SectionedGridRecyclerViewAdapter.Section(12,"no último mês"));
+        sections.add(new SectionedGridRecyclerViewAdapter.Section(14,"nos últimos 6 meses"));
+        sections.add(new SectionedGridRecyclerViewAdapter.Section(20,"há mais de um ano"));
 
         //add your adapter to the sectionAdapter
         //Add your adapter to the sectionAdapter
