@@ -16,15 +16,12 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleView
     private static final int COUNT = 50;//100
 
     private final Context mContext;
-    private final List<Integer> mItems;
-    private int mCurrentItemId = 0;
+    private List<String> mPhotoLinks;
 
-    public SimpleAdapter(Context context){
+    public SimpleAdapter(Context context, List<String> photosList){
+        this.mPhotoLinks = photosList;
         mContext = context;
-        mItems = new ArrayList<Integer>(COUNT);
-        for(int i = 0; i < COUNT; i++){
-            addItem(i);
-        }
+
     }
 
     @NonNull
@@ -36,24 +33,20 @@ public class SimpleAdapter extends RecyclerView.Adapter<SimpleAdapter.SimpleView
 
     @Override
     public void onBindViewHolder(@NonNull SimpleViewHolder holder, int position) {
-        holder.title.setText(mItems.get(position).toString());
 
     }
 
     public void addItem(int position){
-        final int id = mCurrentItemId++;
-        mItems.add(position, id);
-        notifyItemInserted(position);
+
     }
 
     public void removeItem(int position){
-        mItems.remove(position);
-        notifyItemRemoved(position);
+
     }
 
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mPhotoLinks.size();
     }
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder{

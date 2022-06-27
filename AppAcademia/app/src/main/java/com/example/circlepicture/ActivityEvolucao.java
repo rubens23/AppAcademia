@@ -67,33 +67,31 @@ public class ActivityEvolucao extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEvolucaoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        bc = new BancoController(this);
+        initMembers();
         btn_new_photo = findViewById(R.id.btn_newImage);
-        id_user = FirebaseAuth.getInstance().getUid();
-
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference();
-
         btn_new_photo.setOnClickListener(v->{
             takePicture();
         });
-
         setImagesInAdapter();
+        setCategoriesSections();
 
+    }
 
-
-        //Your RecyclerView
+    private void managingRecycler(List<String> listaPhotos) {
         binding.recycler.setHasFixedSize(true);
         binding.recycler.setLayoutManager(new GridLayoutManager(this, 4));
 
         //Your recyclerview adapter
-        mAdapter = new SimpleAdapter(this);
+        mAdapter = new SimpleAdapter(this, listaPhotos);
 
-        //This is the code to provide a sectioned grid
+    }
 
-        setCategoriesSections();
+    private void initMembers() {
+        bc = new BancoController(this);
+        id_user = FirebaseAuth.getInstance().getUid();
 
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference();
     }
 
     @Override
@@ -204,9 +202,7 @@ public class ActivityEvolucao extends AppCompatActivity {
                     imageLinks.add(imagesSavedInDatabase.getString(0));
                 }
             }while (imagesSavedInDatabase.moveToNext());
-            //ja tenho as imagens setadas em uma lista
-            //posso passar essa lista para o adaptador colocar cada imagem
-            //em um item da customGridLayout
+            managingRecycler(imageLinks);
         }
     }
 
