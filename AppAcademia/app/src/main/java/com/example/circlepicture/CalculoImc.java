@@ -14,11 +14,11 @@ public class CalculoImc extends AppCompatActivity {
     
     //todo deixar o layout dessa activity mais bonito
 
-    EditText peso, altura;
-    Button btnImc;
-    TextView auxResultadoImc, resultadoImc, descricaoImc;
-    Float pesoImc, alturaImc, resImc;
-    String formattedImc;
+    private EditText peso, altura;
+    private Button btnImc;
+    private TextView auxResultadoImc, resultadoImc, descricaoImc;
+    private Float pesoImc, alturaImc, resImc;
+    private String formattedImc;
 
 
     @Override
@@ -28,43 +28,52 @@ public class CalculoImc extends AppCompatActivity {
 
         peso = findViewById(R.id.peso);
         altura = findViewById(R.id.altura);
-        resultadoImc = (TextView) findViewById(R.id.resultadoImc);
-        auxResultadoImc = (TextView) findViewById(R.id.auxResultadoImc);
-        descricaoImc = (TextView) findViewById(R.id.descricaoIMC);
-        btnImc = (Button) findViewById(R.id.btnImc);
+        resultadoImc = findViewById(R.id.resultadoImc);
+        auxResultadoImc = findViewById(R.id.auxResultadoImc);
+        descricaoImc = findViewById(R.id.descricaoIMC);
+        btnImc = findViewById(R.id.btnImc);
         btnImc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pesoImc = Float.valueOf(peso.getText().toString().trim());
-                alturaImc = Float.valueOf(altura.getText().toString().trim());
-                resImc = pesoImc / (alturaImc * alturaImc);
-                formattedImc = String.format("%.2f", resImc);
-                resultadoImc.setText(formattedImc);
-                auxResultadoImc.setVisibility(View.VISIBLE);
-                resultadoImc.setVisibility(View.VISIBLE);
-                if (resImc >= 18.5 && resImc <= 24.9){
-                    descricaoImc.setVisibility(View.VISIBLE);
-                    descricaoImc.setText("Você está com o peso normal");
-                }else if (resImc > 24.9 && resImc <= 29.9){
-                    descricaoImc.setVisibility(View.VISIBLE);
-                    descricaoImc.setText("Você está com sobrepeso");
-                }else if (resImc >= 30 && resImc <= 34.9){
-                    descricaoImc.setVisibility(View.VISIBLE);
-                    descricaoImc.setText("Você está com obesidade Grau I");
-                }else if (resImc > 34.9 && resImc <= 39.9){
-                    descricaoImc.setVisibility(View.VISIBLE);
-                    descricaoImc.setText("você está com obesidade Grau II");
-                }else if (resImc > 39.9){
-                    descricaoImc.setVisibility(View.VISIBLE);
-                    descricaoImc.setText("Você está com Obesidade Grau III ou Mórbida");
-                }else{
-                    descricaoImc.setVisibility(View.VISIBLE);
-                    descricaoImc.setText("Você está abaixo do peso ideal");
-                }
+                getImc()
+                
 
             }
         });
 
 
+    }
+
+    public void getImc(){
+        pesoImc = Float.valueOf(peso.getText().toString().trim());
+        alturaImc = Float.valueOf(altura.getText().toString().trim());
+        resImc = pesoImc / (alturaImc * alturaImc);
+        formattedImc = String.format("%.2f", resImc);
+        resultadoImc.setText(formattedImc);
+        auxResultadoImc.setVisibility(View.VISIBLE);
+        resultadoImc.setVisibility(View.VISIBLE);
+        getImcCategoryResult()
+    }
+    public void getImcCategoryResult(){
+        if (resImc >= 18.5 && resImc <= 24.9){
+              descricaoImc.setVisibility(View.VISIBLE);
+              descricaoImc.setText("Você está com o peso normal");
+        }else if (resImc > 24.9 && resImc <= 29.9){
+              descricaoImc.setVisibility(View.VISIBLE);
+              descricaoImc.setText("Você está com sobrepeso");
+        }else if (resImc >= 30 && resImc <= 34.9){
+              descricaoImc.setVisibility(View.VISIBLE);
+              descricaoImc.setText("Você está com obesidade Grau I");
+        }else if (resImc > 34.9 && resImc <= 39.9){
+              descricaoImc.setVisibility(View.VISIBLE);
+              descricaoImc.setText("você está com obesidade Grau II");
+        }else if (resImc > 39.9){
+              descricaoImc.setVisibility(View.VISIBLE);
+              descricaoImc.setText("Você está com Obesidade Grau III ou Mórbida");
+        }else{
+              descricaoImc.setVisibility(View.VISIBLE);
+              descricaoImc.setText("Você está abaixo do peso ideal");
+        }
+        
     }
 }
